@@ -40,3 +40,23 @@ export async function addPost(post: Post):Promise<string>{
   }
 }
 
+
+export async function deletePost(id:string){
+  console.log("posting ",id);
+  
+  try {
+    const res = await fetch(`http://localhost:${PORT}/post/delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const message = await res.text();
+    console.log("Server response:", message);
+
+    return message;
+  } catch (err) {
+    console.error("Error add post:", err);
+    return `Error add post:, ${err}`;
+  }
+}

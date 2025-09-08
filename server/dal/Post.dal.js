@@ -24,11 +24,11 @@ export async function connect() {
 }
 
 // Given an img,description,likes,nameRaised,time  creat a new post , return post new id  if not return -1
-export async function addNewPostDal(img,description,likes,nameRaised,time) {
+export async function addNewPostDal(img, description, likes, nameRaised, time) {
   try {
     const db = await connect();
     const result = await db.collection("postes").insertOne({
-      img: img,  
+      img: img,
       description: description,
       likes: likes,
       nameRaised: nameRaised,
@@ -45,7 +45,7 @@ export async function addNewPostDal(img,description,likes,nameRaised,time) {
 export async function getAllPostDal() {
   try {
     const db = await connect();
-    const result = await db.collection('postes').find().toArray(); 
+    const result = await db.collection("postes").find().toArray();
     return result;
   } catch (err) {
     console.log(err);
@@ -54,26 +54,39 @@ export async function getAllPostDal() {
 }
 
 // Given nathing  , return all postes ;  if not return []
-export async function deletePostDal(id){
+export async function deletePostDal(id) {
   try {
     const db = await connect();
-    const result = await db.collection('postes').deleteOne({_id: new ObjectId(id)});
-    console.log(result) 
+    const result = await db
+      .collection("postes")
+      .deleteOne({ _id: new ObjectId(id) });
+    console.log(result);
     return result;
   } catch (err) {
-    console.log("file dall",err);
+    console.log("file dall", err);
     return false;
   }
 }
 
-
-
+export async function updatePost(id, key, newValue) {
+  try {
+    const db = await connect();
+    const result = await db
+      .collection("postes")
+      .updateOne({ _id: new ObjectId(id) }, { $set: { key: newValue } });
+      console.log(result);
+    return result;
+  } catch (err) {
+    console.log("file dall", err);
+    return false;
+  }
+}
 
 // export async function chackPostExist(id){
 // try {
 //     const db = await connect();
 //     const result = await db.collection('postes').find({ _id: new ObjectId(id) });
-//     // console.log(result) 
+//     // console.log(result)
 //     return result;
 //   } catch (err) {
 //     console.log("file dall",err);

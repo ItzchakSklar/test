@@ -1,5 +1,5 @@
 import type { Post } from "../../types/Post.tsx";
-import { addPost} from "../../api/post.tsx"
+import { addPost,deletePost} from "../../api/post.tsx"
 
 export default function Post(post: Post){ 
   return (
@@ -9,6 +9,7 @@ export default function Post(post: Post){
       <p>likes: {post.likes}</p>
       <p>Raised by: {post.nameRaised}</p>
       <p>in: {post.time}</p>
+      <button className="delete-post" onClick={() => deletePost(post._id)}>delete</button>
     </div>
   )
 }
@@ -18,3 +19,4 @@ export async function hendelANewPost(post:Post){
   post.time = new Date().toString();
   await addPost(post)
 }
+

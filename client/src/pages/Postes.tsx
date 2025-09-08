@@ -8,11 +8,11 @@ export default function Postes() {
   const [postes,setPostes] = useState([] as Post[])
   useEffect(() => {
     getAllPost().then((data) => {
-      if (data.length > 0) {
+      if (data.length != postes.length) {
         setPostes(data);
       }
     });
-  }, []);
+  }, [postes]);
   return (
     <div className="postes-body">
         <h2>Postes</h2>

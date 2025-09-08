@@ -6,17 +6,17 @@ import {
 
 // add post
 export async function addNewPost(req, res) {
-  console.log("server get: ",req.method);
+  console.log("server get: ",req.method,"the post", req.body);
   try {
-    const { img, description, likes, nameRaised, time } = req.body;
-    if (!img || !description || !likes || !nameRaised || !time) {
-      res.status(400).send("Invalid input");
+    const { img, description, nameRaised, likes , time } = req.body;
+    if (!img || !description || !nameRaised || !likes || !time) {
+      res.status(400).send("Invalid input 1");
     }
     const id = await addNewPostServices(
       img,
       description,
-      likes,
       nameRaised,
+      likes,
       time
     );
     if (id != -1) {
