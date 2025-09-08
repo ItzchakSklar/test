@@ -1,13 +1,13 @@
 import type { Post } from "../../types/Post.tsx";
 
-export default function Post(post: Post) {
+export default function Post(post: Post){ 
   return (
     <div className="card">
-      <img src={"http://localhost:3004/public"+post.img} className="img-post" />
+      <img src={"http://localhost:3004/public/:"+post.img} className="img-post" />
       <p>{post.description}</p>
       <p>likes: {post.likes}</p>
       <p>Raised by: {post.nameRaised}</p>
       <p>in: {post.time}</p>
     </div>
-  );
+  )
 }

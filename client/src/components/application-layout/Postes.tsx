@@ -16,6 +16,9 @@ export default function Postes() {
   return (
     <div className="postes-body">
         <h2>Postes</h2>
+        {postes.length == 0 &&(
+          <p>loding you can awate</p>
+        )}
       <div className="postes">{postes.map((p) => Postf(p))}</div>
   </div>
   );
