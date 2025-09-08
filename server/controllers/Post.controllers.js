@@ -1,15 +1,24 @@
 import {
   addNewPostServices,
+  getAllPostServices,
+  deletePostServices
 } from "../services/Post.services.js";
 
 // add post
 export async function addNewPost(req, res) {
+  console.log("server get: ",req.method);
   try {
-    const { img,description,likes,nameRaised,time} = req.body;
+    const { img, description, likes, nameRaised, time } = req.body;
     if (!img || !description || !likes || !nameRaised || !time) {
       res.status(400).send("Invalid input");
     }
-    const id = await addNewPostServices(img,description,likes,nameRaised,time);
+    const id = await addNewPostServices(
+      img,
+      description,
+      likes,
+      nameRaised,
+      time
+    );
     if (id != -1) {
       res.status(200).send(`post added succefuly`);
     } else {
@@ -21,21 +30,49 @@ export async function addNewPost(req, res) {
   }
 }
 
-// not used
-export async function ChackIfUserExist(req, res) {
+// Given nathing  , return all postes ;  if not return []
+export async function getAllPost(req, res) {
+  console.log("server get: ",req.method);
   try {
-    const result = await ChackIfuserExistServices(req.body.name);
-    console.log("sendin chack user: ", result);
-    res.send(result);
-  } catch (error) {
-    res.status(500).send(false);
+    const Postes = await getAllPostServices();
+    if (Postes != []) {
+      console.log("sending ", Postes);
+      res.status(200).json(Postes);
+    } else {
+      console.log("faile sending Postes");
+      res.status(500).json([]);
+    }
+  } catch (err) {
+    console.error("Error get postes:", err);
+    res.status(500).json([]);
   }
 }
 
-// not used
-export async function getUser(req, res) {
-  const username = req.params.username;
-  const user = await getUserServices(username);
-  console.log("sending data user: ", user);
-  res.json(user);
+// delete Post by id
+export async function deletePost(req, res) {
+  console.log("server get: ",req.method, req.params.id);
+  try {
+    let id = 0
+    try {
+      id = req.params.id;
+      if (!id){ console.log("id missing")
+      return res.send("you dont send id");
+      }
+    } catch (err) {
+      console.log(err);
+      return res.send("you dont send id");
+    }
+    // deletePostServices return true or false
+    const seccses = await deletePostServices(id);
+    if (seccses){
+      console.log("sending delete",id);
+      return res.status(200).send("seccses delete post with id:",id);
+    } else {
+      console.log("faile delete post with id:",id);
+      return res.status(500).send(`faile delete post with id: ${id}`);
+    }
+  } catch (err) {
+    console.error("Error delete:", err);
+    res.status(500).send('santhing going rong with the server pleas call 052...');
+  }
 }
