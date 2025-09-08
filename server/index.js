@@ -11,7 +11,7 @@ app.use(cors())
 
 app.use(express.json());
 
-app.get("/public:img", (req, res, next)=>{ 
+app.get("/public/:img", (req, res, next)=>{ 
     // i take this code from here https://stackoverflow.com/questions/30610281/how-to-use-static-folder-but-also-use-routing-in-express
     if(req.accepts('application/json') && !req.accepts('html')) {
         return next();
@@ -19,6 +19,7 @@ app.get("/public:img", (req, res, next)=>{
     let img = req.params.img
     // and from here https://www.geeksforgeeks.org/web-tech/express-js-res-sendfile-function/
     const __dirname = 'public';
+    console.log(img)
     return res.sendFile(img, { root: `./${__dirname}` }, (err)=> {
         if (err) {
             console.error('Error sending file:', err);

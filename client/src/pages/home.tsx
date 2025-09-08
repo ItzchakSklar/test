@@ -1,6 +1,6 @@
 import { Link, Route, Routes } from "react-router-dom";
-import Postes from "../components/application-layout/Postes.tsx" ;
-
+import Postes from "./postes.tsx";
+import SendPost from "./SendPost.tsx";
 
 export default function Home() {
   return (
@@ -15,10 +15,14 @@ export default function Home() {
           <Link className="home-link" to="/">
             Home
           </Link>
+          <Link className="home-link" to="/SendPost">
+            Post
+          </Link>
         </div>
       </header>
       <Routes>
-        <Route path="/" element={<Postes />}/>
+        <Route path="/" element={<Postes />} />
+        <Route path="/SendPost" element={<SendPost />} />
       </Routes>
     </>
   );

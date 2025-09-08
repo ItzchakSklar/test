@@ -1,13 +1,20 @@
 import type { Post } from "../../types/Post.tsx";
+import { addPost} from "../../api/post.tsx"
 
 export default function Post(post: Post){ 
   return (
     <div className="card">
-      <img src={"http://localhost:3004/public/:"+post.img} className="img-post" />
+      <img src={"http://localhost:3004/public/"+post.img} className="img-post" />
       <p>{post.description}</p>
       <p>likes: {post.likes}</p>
       <p>Raised by: {post.nameRaised}</p>
       <p>in: {post.time}</p>
     </div>
   )
+}
+
+export async function hendelANewPost(post:Post){
+  post.likes = 0;
+  post.time = new Date().toString();
+  await addPost(post)
 }

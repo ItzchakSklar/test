@@ -1,7 +1,7 @@
-import { getAllPost } from "../../api/post.tsx"
+import { getAllPost } from "../api/post.tsx"
 import { useEffect,useState } from "react";
-import Postf from "./Post.tsx";
-import type { Post } from "../../types/Post.tsx";
+import Postf from "../components/application-layout/Post.components.tsx";
+import type { Post } from "../types/Post.tsx";
 
 
 export default function Postes() {

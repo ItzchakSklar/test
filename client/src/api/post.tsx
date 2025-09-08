@@ -20,7 +20,7 @@ export async function getAllPost():Promise<Post[]>{
 }
 
 export async function addPost(post: Post):Promise<string>{
-  console.log(post);
+  console.log("posting ",post);
   
   try {
     const res = await fetch(`http://localhost:${PORT}/post/register`, {
@@ -39,3 +39,4 @@ export async function addPost(post: Post):Promise<string>{
     return `Error add post:, ${err}`;
   }
 }
+
