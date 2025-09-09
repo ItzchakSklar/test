@@ -68,7 +68,7 @@ export async function deletePostDal(id) {
   }
 }
 
-// Given id obyect,key you wont to chang and new value, >  return true if succsys if not return flse
+// Given id post, key you wont to chang and new value, >  return true if succsys if not return flse
 export async function updatePostDal(id, key, newValue) {
   try {
     const db = await connect();
@@ -77,32 +77,51 @@ export async function updatePostDal(id, key, newValue) {
       const result = await db
         .collection("postes")
         .updateOne({ _id: new ObjectId(id) }, { $set: { img: newValue } });
-      console.log("the result",result.acknowledged);
+      console.log("the result", result.acknowledged);
       return result.acknowledged;
     }
     if (key == "description") {
       const result = await db
         .collection("postes")
-        .updateOne({ _id: new ObjectId(id) }, { $set: { description: newValue } });
-      console.log("the result",result.acknowledged);
+        .updateOne(
+          { _id: new ObjectId(id) },
+          { $set: { description: newValue } }
+        );
+      console.log("the result", result.acknowledged);
       return result.acknowledged;
     }
     if (key == "likes") {
       const result = await db
         .collection("postes")
         .updateOne({ _id: new ObjectId(id) }, { $set: { likes: newValue } });
-      console.log("the result",result.acknowledged);
+      console.log("the result", result.acknowledged);
       return result.acknowledged;
     }
     if (key == "nameRaised") {
       const result = await db
         .collection("postes")
-        .updateOne({ _id: new ObjectId(id) }, { $set: { nameRaised: newValue } });
-      console.log("the result",result.acknowledged);
+        .updateOne(
+          { _id: new ObjectId(id) },
+          { $set: { nameRaised: newValue } }
+        );
+      console.log("the result", result.acknowledged);
       return result.acknowledged;
     }
     console.log("not a invaled key");
     return false;
+  } catch (err) {
+    console.log("file dall", err);
+    return false;
+  }
+}
+
+// Given id >  return post if succsys if not return flse
+export async function getPostDal(id) {
+  try {
+    const db = await connect();
+    const post = db.collection("postes").findOne({ _id: new ObjectId(id) });
+    console.log(post);
+    return post;
   } catch (err) {
     console.log("file dall", err);
     return false;

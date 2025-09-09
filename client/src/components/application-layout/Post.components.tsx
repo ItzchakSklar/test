@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 export default function Post(post: Post){ 
   return ( 
     <div className="card">
-      <Link className="post-link" to={`/Post/${post._id}`}>
+      {/* <Link className="post-link" to={`/Post/${post._id}`}> */}
       <img src={"http://localhost:3004/public/"+post.img} className="img-post" />
       <p>{post.description}</p>
       <p>likes: {post.likes}</p>
       <p>Raised by: {post.nameRaised}</p>
       <p>in: {post.time}</p>
-      </Link>
+      {/* </Link> */}
       <button className="delete-post" onClick={() => deletePost(post._id)}>delete</button>
     </div>
     

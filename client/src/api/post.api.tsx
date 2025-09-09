@@ -60,28 +60,30 @@ export async function deletePost(id:string){
   }
 }
 
-// export async function getPost(id: string|undefined):Promise<Post>{
-//   console.log("get ",id);
-//   if (id != undefined){
-//    try {
-//     const res = await fetch(`http://localhost:${PORT}/post/post/${id}`, {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     const post = await res.json();
-//     console.log("Server response:", post);
-
-//     return post;
-//   } catch (err) {
-//     console.error("Error get post:", err);
-//     return {_id:"loding", img:"loding", description:"loding", likes:0,nameRaised:"loding",
-//   time: "loding"};
-//   }
-// }
-// else{
-//   return {_id:"loding", img:"loding", description:"loding", likes:0,nameRaised:"loding",
-//   time: "loding"}
-// }
-// }
+export async function getPost(id: string):Promise<Post>{
+  console.log("get ",id);
+  if (id != undefined){
+   try {
+    const res = await fetch(`http://localhost:${PORT}/post/post/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const post = await res.json();
+    console.log("Server response:", post);
+    if (post._id == -1){
+      return {_id:"loding", img:"loding", description:"loding", likes:0,nameRaised:"loding",time: "loding"};
+    }
+    return post;
+  } catch (err) {
+    console.error("Error get post:", err);
+    return {_id:"loding", img:"loding", description:"loding", likes:0,nameRaised:"loding",
+  time: "loding"};
+  }
+}
+else{
+  return {_id:"loding", img:"loding", description:"loding", likes:0,nameRaised:"loding",
+  time: "loding"}
+}
+}

@@ -2,7 +2,8 @@ import {
   addNewPostServices,
   getAllPostServices,
   deletePostServices,
-  updatePostServices
+  updatePostServices,
+  getPostServices
 } from "../services/Post.services.js";
 
 // add post
@@ -97,3 +98,23 @@ export async function updatePost(req, res) {
     res.status(500).send("Server error");
   }
 }
+
+export async function getPost(req, res){
+  console.log("server get: ",req.method,"the post id",req.params.id);
+  try {
+    const id = req.params.id;
+    if (!id) {
+      res.status(400).json({_id:-1});
+    }
+    const result = await getPostServices(id);
+    if (result) {
+      res.status(200).json(result);
+    } else {
+      res.status(500).json({_id:-1});
+    }
+  } catch (err) {
+    console.error("Error get post:", err);
+    res.status(500).json({_id:-1});
+  }
+}
+

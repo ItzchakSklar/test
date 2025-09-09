@@ -3,7 +3,8 @@ import {
   addNewPostDal,
   getAllPostDal,
   deletePostDal,
-  updatePostDal
+  updatePostDal,
+  getPostDal
 } from "../dal/Post.dal.js";
 // import axios from "axios";  // not used
 // import path from "path";     // not used
@@ -42,6 +43,15 @@ export async function updatePostServices(id, key,newValue){
   return await updatePostDal(id, key,newValue);
 }
 
+// Given id >  return post if succsys if not return flse
+export async function getPostServices(id) {
+  const result = await getPostDal(id)
+  if(result){
+    return result
+  }
+  else {return false}
+
+}
 
 // I tried to build something but it doesn't work.
 // I took the code from Google by writing:  "script that takes a URL and downloads the image to /public and returns its name by js"
