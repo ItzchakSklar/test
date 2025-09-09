@@ -104,6 +104,7 @@ export async function getPost(req, res){
   try {
     const id = req.params.id;
     if (!id) {
+      console.log("sending -1 error server");
       res.status(400).json({_id:-1});
     }
     const result = await getPostServices(id);

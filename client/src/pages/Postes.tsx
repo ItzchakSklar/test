@@ -9,6 +9,7 @@ export default function Postes() {
   useEffect(() => {
     getAllPost().then((data) => {
       if (data.length != postes.length) {
+        console.log(data);
         setPostes(data);
       }
     });

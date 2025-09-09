@@ -1,21 +1,22 @@
 import PostC from "../components/application-layout/Post.components.tsx";
-import {useParams} from "react-router-dom";
-import { useState,useEffect } from "react"
-import {getPost} from "../api/post.api.tsx"
-import type {Post} from "../types/Post.tsx"
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getPost } from "../api/post.api.tsx";
+import type { Post } from "../types/Post.tsx";
 
-export default async function Postf() {
-    const  id = useParams();
-     console.log(id.id);
-    const { post, setPost } = useState({} as Post)
-    useEffect(() => {
-        getPost(id.id as string).then((data) => {
-            setPost(data);
-        });
-      }, [post]);
+export default function Postf() {
+  const id = useParams();
+  const [post, setPost] = useState<Post | null>(null);
+  useEffect(() => {
+    if (post == null)
+      getPost(id.id as string).then((data) => {
+        console.log("post = ", data);
+        setPost(data);
+      });
+  }, [post]);
   return (
-    <>
-      {PostC(post)}
-    </>
-  );
+  <div className="post-comp">
+    {post && PostC(post)}
+    </div>
+  )
 }

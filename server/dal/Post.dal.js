@@ -14,7 +14,8 @@ let db = null;
  * @returns {Promise<Db>}
  */
 
-export async function connect() {
+
+async function connect() {
   if (!db) {
     await client.connect();
     db = client.db("Linkodkod");

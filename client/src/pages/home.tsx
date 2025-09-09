@@ -2,6 +2,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import Postes from "./postes.tsx";
 import SendPost from "./SendPost.tsx";
 import Post from "./post.tsx"
+import UpdatePost from "./updatePost.tsx";
 
 export default function Home() {
   return (
@@ -22,9 +23,10 @@ export default function Home() {
         </div>
       </header>
       <Routes>
-        <Route path="/" element={<Postes />} />
-        <Route path="/SendPost" element={<SendPost />} />
-        <Route path="/Post/:id" element={<Post />} />
+        <Route path="/" element={<Postes />} key="postes"/>
+        <Route path="/SendPost" element={<SendPost />} key="add-post"/>
+        <Route path="/Post/:id" element={<Post />} key="post"/>
+        <Route path="/update/:id" element={<UpdatePost />} key="update"/>
       </Routes>
     </>
   );

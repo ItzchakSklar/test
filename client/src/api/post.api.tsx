@@ -87,3 +87,24 @@ else{
   time: "loding"}
 }
 }
+
+export async function updatePostApi(id:string,key:string,newValue:string) {
+  console.log("posting ",post);
+  
+  try {
+    const res = await fetch(`http://localhost:${PORT}/post/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+    const message = await res.text();
+    console.log("Server response:", message);
+
+    return message;
+  } catch (err) {
+    console.error("Error add post:", err);
+    return `Error add post:, ${err}`;
+  }
+}
