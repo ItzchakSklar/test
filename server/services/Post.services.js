@@ -3,6 +3,7 @@ import {
   addNewPostDal,
   getAllPostDal,
   deletePostDal,
+  updatePostDal
 } from "../dal/Post.dal.js";
 // import axios from "axios";  // not used
 // import path from "path";     // not used
@@ -36,6 +37,10 @@ export async function deletePostServices(id) {
   return false;
 }
 
+// Given id obyect,key,new value, >  return true or flse
+export async function updatePostServices(id, key,newValue){
+  return await updatePostDal(id, key,newValue);
+}
 
 
 // I tried to build something but it doesn't work.

@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Postes from "./postes.tsx";
 import SendPost from "./SendPost.tsx";
+import Post from "./post.tsx"
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <Routes>
         <Route path="/" element={<Postes />} />
         <Route path="/SendPost" element={<SendPost />} />
+        <Route path="/Post/:id" element={<Post />} />
       </Routes>
     </>
   );

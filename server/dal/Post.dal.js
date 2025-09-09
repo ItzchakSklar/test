@@ -68,14 +68,41 @@ export async function deletePostDal(id) {
   }
 }
 
-export async function updatePost(id, key, newValue) {
+// Given id obyect,key you wont to chang and new value, >  return true if succsys if not return flse
+export async function updatePostDal(id, key, newValue) {
   try {
     const db = await connect();
-    const result = await db
-      .collection("postes")
-      .updateOne({ _id: new ObjectId(id) }, { $set: { key: newValue } });
-      console.log(result);
-    return result;
+    //  i do swich case to find the key
+    if (key == "img") {
+      const result = await db
+        .collection("postes")
+        .updateOne({ _id: new ObjectId(id) }, { $set: { img: newValue } });
+      console.log("the result",result.acknowledged);
+      return result.acknowledged;
+    }
+    if (key == "description") {
+      const result = await db
+        .collection("postes")
+        .updateOne({ _id: new ObjectId(id) }, { $set: { description: newValue } });
+      console.log("the result",result.acknowledged);
+      return result.acknowledged;
+    }
+    if (key == "likes") {
+      const result = await db
+        .collection("postes")
+        .updateOne({ _id: new ObjectId(id) }, { $set: { likes: newValue } });
+      console.log("the result",result.acknowledged);
+      return result.acknowledged;
+    }
+    if (key == "nameRaised") {
+      const result = await db
+        .collection("postes")
+        .updateOne({ _id: new ObjectId(id) }, { $set: { nameRaised: newValue } });
+      console.log("the result",result.acknowledged);
+      return result.acknowledged;
+    }
+    console.log("not a invaled key");
+    return false;
   } catch (err) {
     console.log("file dall", err);
     return false;

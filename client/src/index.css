@@ -186,7 +186,7 @@ header {
   display: flex;
   flex-direction: column;
   padding: 4rem;
-  margin: 5rem;
+  /* margin: 5rem; */
   background-color: rgb(221, 221, 255);
   border-radius: 5px;
   border-color: black;
@@ -197,6 +197,7 @@ header {
 .postes {
   display: flex;
   flex-direction: column;
+  padding: 5rem;
   gap: 5px;
   background-color: rgb(36, 36, 243);
   max-width: 600px;
@@ -230,6 +231,7 @@ h4 {
   margin: 0%;
 }
 
-Paper{
-  
+.Post{
+  font: 1em sans-serif;;
+  padding-top:8rem;
 }

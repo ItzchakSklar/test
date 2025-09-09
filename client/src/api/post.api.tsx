@@ -40,9 +40,8 @@ export async function addPost(post: Post):Promise<string>{
   }
 }
 
-
 export async function deletePost(id:string){
-  console.log("posting ",id);
+  console.log("deleteing ",id);
   
   try {
     const res = await fetch(`http://localhost:${PORT}/post/delete/${id}`, {
@@ -56,7 +55,33 @@ export async function deletePost(id:string){
 
     return message;
   } catch (err) {
-    console.error("Error add post:", err);
-    return `Error add post:, ${err}`;
+    console.error("Error delete post:", err);
+    return `Error delete post:, ${err}`;
   }
 }
+
+// export async function getPost(id: string|undefined):Promise<Post>{
+//   console.log("get ",id);
+//   if (id != undefined){
+//    try {
+//     const res = await fetch(`http://localhost:${PORT}/post/post/${id}`, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     const post = await res.json();
+//     console.log("Server response:", post);
+
+//     return post;
+//   } catch (err) {
+//     console.error("Error get post:", err);
+//     return {_id:"loding", img:"loding", description:"loding", likes:0,nameRaised:"loding",
+//   time: "loding"};
+//   }
+// }
+// else{
+//   return {_id:"loding", img:"loding", description:"loding", likes:0,nameRaised:"loding",
+//   time: "loding"}
+// }
+// }

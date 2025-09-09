@@ -1,7 +1,8 @@
 import {
   addNewPostServices,
   getAllPostServices,
-  deletePostServices
+  deletePostServices,
+  updatePostServices
 } from "../services/Post.services.js";
 
 // add post
@@ -74,5 +75,25 @@ export async function deletePost(req, res) {
   } catch (err) {
     console.error("Error delete:", err);
     res.status(500).send('santhing going rong with the server pleas call 052...');
+  }
+}
+
+// update Post by id
+export async function updatePost(req, res) {
+  console.log("server get: ",req.method,"the post",req.params.id,"value", req.body);
+  try {
+    const { key, newValue } = req.body;
+    if (!key || !newValue) {
+      res.status(400).send("Invalid input to put");
+    }
+    const result = await updatePostServices(req.params.id, key ,newValue);
+    if (result) {
+      res.status(200).send(`post update succefuly`);
+    } else {
+      res.status(500).send(`Failed to update post in database`);
+    }
+  } catch (err) {
+    console.error("Error update post:", err);
+    res.status(500).send("Server error");
   }
 }
