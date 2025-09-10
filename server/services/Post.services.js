@@ -67,27 +67,3 @@ export async function saveImgToDisk(url,path){
   })
   console.log("i itzchak");
 }
-
-// I tried to build something but it doesn't work.
-// I took the code from Google by writing:  "script that takes a URL and downloads the image to /public and returns its name by js"
-
-// const imageUrl = img
-//  try {
-//       const response = await axios({
-//           method: 'get',
-//           url: imageUrl,
-//           responseType: 'stream'
-//       });
-//       const fileName = path.basename(imageUrl);
-//       const filePath = path.join(__dirname, 'public', fileName);
-//        const writer = fs.createWriteStream(filePath);
-//       response.data.pipe(writer);
-
-//       await new Promise((resolve, reject) => {
-//           writer.on('finish', resolve);
-//           writer.on('error', reject);
-//       });
-//   } catch (error) {
-//       console.error('Error downloading image:', error);
-//       return res.status(500).send('Failed to download image.');
-//   }
