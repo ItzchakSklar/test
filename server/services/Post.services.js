@@ -65,5 +65,4 @@ export async function saveImgToDisk(url,path){
     console.log("the file dowlode: ",response);
     response.pipe(localPath)
   })
-  console.log("i itzchak");
 }
