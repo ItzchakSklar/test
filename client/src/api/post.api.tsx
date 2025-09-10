@@ -89,15 +89,15 @@ else{
 }
 
 export async function updatePostApi(id:string,key:string,newValue:string) {
-  console.log("posting ",post);
+  console.log("posting update post id:",id,"the key:",key,"to:",newValue);
   
   try {
-    const res = await fetch(`http://localhost:${PORT}/post/register`, {
-      method: "POST",
+    const res = await fetch(`http://localhost:${PORT}/post/put/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(post),
+      body: JSON.stringify({key:key,newValue:newValue}),
     });
     const message = await res.text();
     console.log("Server response:", message);

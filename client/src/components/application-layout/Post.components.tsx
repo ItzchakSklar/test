@@ -28,16 +28,20 @@ export async function hendelANewPost(post:Post){
 }
 
 export async function hendelAUpdatePost(newPost:Post,post:Post){
-  if (newPost.description != post.description){
+  // console.log("post:",post);
+  // console.log("new Post:",newPost);
+  
+  
+  if (newPost.description != post.description && newPost.description){
     await updatePostApi(post._id,"description",newPost.description)
   }
-  if (newPost.img != post.img){
+  if (newPost.img != post.img && newPost.img){
     await updatePostApi(post._id,"img",newPost.img)
   }
-  if (newPost.nameRaised != post.nameRaised){
+  if (newPost.nameRaised != post.nameRaised && newPost.nameRaised){
     await updatePostApi(post._id,"nameRaised",newPost.nameRaised)
   }
-  if (newPost.time != post.time){
+  if (newPost.time != post.time && newPost.time){
     await updatePostApi(post._id,"time",newPost.time)
   }  
 }

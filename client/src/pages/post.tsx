@@ -10,7 +10,7 @@ export default function Postf() {
   useEffect(() => {
     if (post == null)
       getPost(id.id as string).then((data) => {
-        console.log("post = ", data);
+        // console.log("post = ", data);
         setPost(data);
       });
   }, [post]);
