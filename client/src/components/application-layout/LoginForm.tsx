@@ -35,7 +35,7 @@ export default function LoginForm() {
     // console.log("Signup successful:", formData);
     // console.log("is admin:", isAdmin);
 
-    navigate("/login");
+    navigate("/home");
   };
 
   return (
