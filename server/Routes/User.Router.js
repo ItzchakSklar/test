@@ -8,4 +8,6 @@ router.post("/register",SingUp)
 
 // login
 router.post("/login",login)
+
+
 export default router;

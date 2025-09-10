@@ -2,12 +2,15 @@ import type { Post } from "../types/Post.tsx";
 
 const PORT = 3004;
 
+
 export async function getAllPost(): Promise<Post[]> {
+  const accessToken = "23456"// localStorage.getItem("accessToken");
   try {
     const res = await fetch(`http://localhost:${PORT}/post/all`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `${accessToken}`
       },
     });
     const postes = await res.json();
@@ -21,12 +24,13 @@ export async function getAllPost(): Promise<Post[]> {
 
 export async function addPost(post: Post): Promise<string> {
   console.log("posting ", post);
-
+  const accessToken = "23456"// localStorage.getItem("accessToken");
   try {
     const res = await fetch(`http://localhost:${PORT}/post/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `${accessToken}`
       },
       body: JSON.stringify(post),
     });
@@ -42,12 +46,13 @@ export async function addPost(post: Post): Promise<string> {
 
 export async function deletePost(id: string) {
   console.log("deleteing ", id);
-
+  const accessToken = "23456"// localStorage.getItem("accessToken");
   try {
     const res = await fetch(`http://localhost:${PORT}/post/delete/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `${accessToken}`
       },
     });
     const message = await res.text();
@@ -62,12 +67,14 @@ export async function deletePost(id: string) {
 
 export async function getPost(id: string): Promise<Post> {
   console.log("get ", id);
+  const accessToken = "23456"// localStorage.getItem("accessToken");
   if (id != undefined) {
     try {
       const res = await fetch(`http://localhost:${PORT}/post/post/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `${accessToken}`
         },
       });
       const post = await res.json();
@@ -108,12 +115,13 @@ export async function getPost(id: string): Promise<Post> {
 
 export async function updatePostApi(id: string, key: string, newValue: string) {
   console.log("posting update post id:", id, "the key:", key, "to:", newValue);
-
+  const accessToken = "23456"// localStorage.getItem("accessToken");
   try {
     const res = await fetch(`http://localhost:${PORT}/post/put/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `${accessToken}`
       },
       body: JSON.stringify({ key: key, newValue: newValue }),
     });

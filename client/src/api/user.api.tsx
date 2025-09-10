@@ -25,6 +25,7 @@ export async function login(loginR:{email: string, password: string}) {
   }
 }
 
+
 export async function register(newUser:{name:string, email: string, password: string}) {
   console.log("sending sing up request for: ",newUser);
 //   try {

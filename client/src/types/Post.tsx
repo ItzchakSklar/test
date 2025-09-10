@@ -1,3 +1,4 @@
+// the fames post type
 export interface Post {
   _id: string;
   img: string;

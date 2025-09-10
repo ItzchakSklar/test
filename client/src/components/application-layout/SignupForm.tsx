@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import {  register,isEmailExsist } from "../../api/user.api.tsx";
 
+
+// disply the sing up forom
 export default function SignupForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

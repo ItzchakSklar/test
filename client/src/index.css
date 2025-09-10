@@ -247,3 +247,9 @@ h4 {
 .comp {
   padding-top: 8rem;
 }
+
+.post-button{
+  background-color: white;
+  align-content: center;
+  border-color: rgb(0, 0, 0);
+}

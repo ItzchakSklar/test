@@ -6,6 +6,7 @@ import UpdatePost from "./updatePost.tsx";
 import Login from "./Login.tsx"
 import Signup from "./SingUp.tsx";
 
+// home page + routes 
 export default function Home() {
   return (
     <>

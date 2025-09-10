@@ -18,4 +18,5 @@ router.put("/put/:id",updatePost)
 // get one post by id 
 router.get("/post/:id",getPost)
 
+
 export default router;

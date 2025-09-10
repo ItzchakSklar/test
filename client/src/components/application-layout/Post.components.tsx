@@ -2,6 +2,8 @@ import type { Post } from "../../types/Post.tsx";
 import { addPost,deletePost,updatePostApi} from "../../api/post.api.tsx"
 import { Link } from "react-router-dom";
 
+
+// disply a post
 export default function Post(post: Post){ 
   return ( 
     <div className="card">
@@ -21,17 +23,16 @@ export default function Post(post: Post){
   )
 }
 
+// hendel A New Post, set 0 in likes and set the time and send to api function "addPost"
 export async function hendelANewPost(post:Post){
   post.likes = 0;
   post.time = new Date().toString();
   await addPost(post)
 }
 
+// hendel Update Post, given the new data to change and the old post see the chenges and used function 
+// updatePostApi to update the data
 export async function hendelAUpdatePost(newPost:Post,post:Post){
-  // console.log("post:",post);
-  // console.log("new Post:",newPost);
-  
-  
   if (newPost.description != post.description && newPost.description){
     await updatePostApi(post._id,"description",newPost.description)
   }

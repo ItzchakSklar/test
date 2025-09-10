@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { getPost } from "../api/post.api.tsx";
 import type { Post } from "../types/Post.tsx";
 
+// geting from api post-data by id from params and save them in post >  return post
 export default function Postf() {
   const id = useParams();
   const [post, setPost] = useState<Post | null>(null);
