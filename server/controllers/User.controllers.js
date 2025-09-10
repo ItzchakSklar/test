@@ -33,16 +33,16 @@ export async function login(req,res){
     const { email ,password } = req.body;
     if (!email || !password) {
       console.log("sending Invalid input");
-      res.status(400).send("Invalid input");
+      res.status(400).json({success:false,msg:"Invalid input"});
     }
     const token = await loginServices(email ,password);
     console.log(token);
     if (token) {
         console.log("sending token");
-      res.status(200).send(token);
+      res.status(200).json({success:true,token:token});
     }else {
       console.log("sending: samthing is rong with the input");
-      res.status(400).send(`samthing is rong with the input`);
+      res.status(400).json({success:false,msg:"samthing is rong with the input"});
     }
   } catch (err) {
     console.error("sending Servrt error, The error is", err);

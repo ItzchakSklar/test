@@ -35,7 +35,8 @@ export default function updatePost() {
   };
 
   return (
-    <Paper elevation={3} sx={{ p: 4, width: 400, mx: "auto", margin: 20 }}>
+    <div className="comp">
+    <Paper elevation={3} sx={{ p: 4, width: 400, mx: "auto", mt: 8 }}>
       <Typography variant="h5" mb={2}>
         update
       </Typography>
@@ -81,5 +82,6 @@ export default function updatePost() {
         </Button>
       </Box>
     </Paper>
+    </div>
   );
 }

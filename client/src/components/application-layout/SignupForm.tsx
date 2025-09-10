@@ -7,12 +7,16 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-import type { Post } from "../types/Post.tsx"
-import { hendelANewPost } from "../components/application-layout/Post.components.tsx"
+import {  register,isEmailExsist } from "../../api/user.api.tsx";
 
-export default function SendPost() {
+export default function SignupForm() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({} as Post)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "user",
+  });
   const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,56 +26,68 @@ export default function SendPost() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    // console.log(formData);
-    
-    if (!formData.img || !formData.description || !formData.nameRaised) {
+
+    if (!formData.name || !formData.email || !formData.password) {
       setError("All fields are required.");
       return;
     }
 
+    if (await isEmailExsist(formData.email)) {
+      setError("Email already registered.");
+      return;
+    }
 
-    await hendelANewPost({ ...formData });
+    await register({ ...formData });
+    // console.log("Signup successful:", formData);
+    // console.log("is admin:", isAdmin);
 
-
-    navigate("/");
+    navigate("/login", { state: { user: formData.name } });
   };
 
   return (
     <div className="comp">
     <Paper elevation={3} sx={{ p: 4, width: 400, mx: "auto", mt: 8 }}>
       <Typography variant="h5" mb={2}>
-        New post
+        Sign Up
       </Typography>
       <Box component="form" onSubmit={handleSubmit}>
         <TextField
-          label="Enter url to img"
-          name="img"
+          label="Name"
+          name="name"
           fullWidth
           margin="normal"
-          value={formData.img}
+          value={formData.name}
           onChange={handleChange}
         />
         <TextField
-          label="Enter your description"
-          name="description"
-          type="description"
+          label="Email"
+          name="email"
+          type="email"
           fullWidth
           margin="normal"
-          value={formData.description}
+          value={formData.email}
           onChange={handleChange}
         />
         <TextField
-          label="Enter your name"
-          name="nameRaised"
-          type="nameRaised"
+          label="Password"
+          name="password"
+          type="password"
           fullWidth
           margin="normal"
-          value={formData.nameRaised}
+          value={formData.password}
           onChange={handleChange}
         />
         {error && <Typography color="error">{error}</Typography>}
         <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
-          Send
+          Sign Up
+        </Button>
+        <Button
+          variant="text"
+          fullWidth
+          sx={{ mt: 1 }}
+          onClick={() => navigate("/login")}
+        >
+          Already have an account? Login
         </Button>
       </Box>
     </Paper>

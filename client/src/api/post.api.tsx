@@ -1,9 +1,9 @@
 import type { Post } from "../types/Post.tsx";
 
-const PORT = 3004 
+const PORT = 3004;
 
-export async function getAllPost():Promise<Post[]>{
-    try {
+export async function getAllPost(): Promise<Post[]> {
+  try {
     const res = await fetch(`http://localhost:${PORT}/post/all`, {
       method: "GET",
       headers: {
@@ -19,9 +19,9 @@ export async function getAllPost():Promise<Post[]>{
   }
 }
 
-export async function addPost(post: Post):Promise<string>{
-  console.log("posting ",post);
-  
+export async function addPost(post: Post): Promise<string> {
+  console.log("posting ", post);
+
   try {
     const res = await fetch(`http://localhost:${PORT}/post/register`, {
       method: "POST",
@@ -40,9 +40,9 @@ export async function addPost(post: Post):Promise<string>{
   }
 }
 
-export async function deletePost(id:string){
-  console.log("deleteing ",id);
-  
+export async function deletePost(id: string) {
+  console.log("deleteing ", id);
+
   try {
     const res = await fetch(`http://localhost:${PORT}/post/delete/${id}`, {
       method: "DELETE",
@@ -60,44 +60,62 @@ export async function deletePost(id:string){
   }
 }
 
-export async function getPost(id: string):Promise<Post>{
-  console.log("get ",id);
-  if (id != undefined){
-   try {
-    const res = await fetch(`http://localhost:${PORT}/post/post/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const post = await res.json();
-    console.log("Server response:", post);
-    if (post._id == -1){
-      return {_id:"loding", img:"loding", description:"loding", likes:0,nameRaised:"loding",time: "loding"};
+export async function getPost(id: string): Promise<Post> {
+  console.log("get ", id);
+  if (id != undefined) {
+    try {
+      const res = await fetch(`http://localhost:${PORT}/post/post/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const post = await res.json();
+      console.log("Server response:", post);
+      if (post._id == -1) {
+        return {
+          _id: "loding",
+          img: "loding",
+          description: "loding",
+          likes: 0,
+          nameRaised: "loding",
+          time: "loding",
+        };
+      }
+      return post;
+    } catch (err) {
+      console.error("Error get post:", err);
+      return {
+        _id: "loding",
+        img: "loding",
+        description: "loding",
+        likes: 0,
+        nameRaised: "loding",
+        time: "loding",
+      };
     }
-    return post;
-  } catch (err) {
-    console.error("Error get post:", err);
-    return {_id:"loding", img:"loding", description:"loding", likes:0,nameRaised:"loding",
-  time: "loding"};
+  } else {
+    return {
+      _id: "loding",
+      img: "loding",
+      description: "loding",
+      likes: 0,
+      nameRaised: "loding",
+      time: "loding",
+    };
   }
 }
-else{
-  return {_id:"loding", img:"loding", description:"loding", likes:0,nameRaised:"loding",
-  time: "loding"}
-}
-}
 
-export async function updatePostApi(id:string,key:string,newValue:string) {
-  console.log("posting update post id:",id,"the key:",key,"to:",newValue);
-  
+export async function updatePostApi(id: string, key: string, newValue: string) {
+  console.log("posting update post id:", id, "the key:", key, "to:", newValue);
+
   try {
     const res = await fetch(`http://localhost:${PORT}/post/put/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({key:key,newValue:newValue}),
+      body: JSON.stringify({ key: key, newValue: newValue }),
     });
     const message = await res.text();
     console.log("Server response:", message);
@@ -108,3 +126,6 @@ export async function updatePostApi(id:string,key:string,newValue:string) {
     return `Error add post:, ${err}`;
   }
 }
+
+
+

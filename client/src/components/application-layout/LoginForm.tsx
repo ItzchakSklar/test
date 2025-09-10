@@ -7,12 +7,14 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-import type { Post } from "../types/Post.tsx"
-import { hendelANewPost } from "../components/application-layout/Post.components.tsx"
+import { login } from "../../api/user.api";
 
-export default function SendPost() {
+export default function SignupForm() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({} as Post)
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,59 +24,55 @@ export default function SendPost() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    // console.log(formData);
-    
-    if (!formData.img || !formData.description || !formData.nameRaised) {
+
+    if (!formData.email || !formData.password) {
       setError("All fields are required.");
       return;
     }
 
+    await login({ ...formData });
+    // console.log("Signup successful:", formData);
+    // console.log("is admin:", isAdmin);
 
-    await hendelANewPost({ ...formData });
-
-
-    navigate("/");
+    navigate("/login");
   };
 
   return (
-    <div className="comp">
     <Paper elevation={3} sx={{ p: 4, width: 400, mx: "auto", mt: 8 }}>
       <Typography variant="h5" mb={2}>
-        New post
+        Login
       </Typography>
       <Box component="form" onSubmit={handleSubmit}>
         <TextField
-          label="Enter url to img"
-          name="img"
+          label="Email"
+          name="email"
+          type="email"
           fullWidth
           margin="normal"
-          value={formData.img}
+          value={formData.email}
           onChange={handleChange}
         />
         <TextField
-          label="Enter your description"
-          name="description"
-          type="description"
+          label="Password"
+          name="password"
+          type="password"
           fullWidth
           margin="normal"
-          value={formData.description}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Enter your name"
-          name="nameRaised"
-          type="nameRaised"
-          fullWidth
-          margin="normal"
-          value={formData.nameRaised}
+          value={formData.password}
           onChange={handleChange}
         />
         {error && <Typography color="error">{error}</Typography>}
         <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
-          Send
+          Login
+        </Button>
+        <Button
+          variant="text"
+          fullWidth
+          sx={{ mt: 1 }}
+          onClick={() => navigate("/login")}
+        >
         </Button>
       </Box>
     </Paper>
-    </div>
   );
 }
