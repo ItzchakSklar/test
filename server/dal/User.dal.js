@@ -23,12 +23,14 @@ async function connect() {
   return db;
 }
 
+// Given email return user from db if not exsist return false
 export async function getUserDal(email) {
   try {
     const db = await connect();
-    const user = await db.collection("user").findOne({
+    const user = await db.collection("users").findOne({
       email: email,
     });
+    console.log("find user: ",user);
     return user;
   } catch (err) {
     console.log(err);
@@ -36,13 +38,14 @@ export async function getUserDal(email) {
   }
 }
 
-// Given name, email, password   he chech if user exsist > return new user id if seccses, -2 if uswer exsist, -1 a connct problem 
+// Given name, email, password   The function chech if user exsist > return new user id if seccses, -2 if user exsist, -1 a connct problem 
 export async function singUpDal(name, email, password) {
   try {
     const db = await connect();
-    const exsist = await getUserDal();
+    const exsist = await getUserDal(email);
+    // console.log(exsist);
     if (!exsist) {
-      const result = await db.collection("user").insertOne({
+      const result = await db.collection("users").insertOne({
         name: name,
         email: email,
         password: password,

@@ -1,7 +1,7 @@
 import { singUpServices, loginServices } from "../services/User.Services.js";
 
 
-// post a user with name, email ,password  > send back text
+// Method post , Given user with {name, email ,password}  > send back text
 export async function SingUp(req,res){
 console.log("server get to add a user metod:",req.method);
   try {
@@ -11,11 +11,13 @@ console.log("server get to add a user metod:",req.method);
     }
     const id = await singUpServices(name, email ,password);
     if (id != -1 && id != -2) {
-        console.log("sending"+`user ${name} added succefuly`);
+        console.log("sending "+`user ${name} added succefuly`);
       res.status(200).send(`user ${name} added succefuly`);
     }else if(id == -2){
+      console.error("sending: Email already in use");
         res.status(200).send(`Email already in use`)
     }else {
+       console.error("sending Failed adding user");
       res.status(500).send(`Failed to add ${name} to users`);
     }
   } catch (err) {
@@ -24,6 +26,7 @@ console.log("server get to add a user metod:",req.method);
   }
 }
 
+// Method post , Given {email:email passord:password},  > return token if exsist  if not return text
 export async function login(req,res){
   console.log("server get to connect:",req.body);
    try {
@@ -33,14 +36,16 @@ export async function login(req,res){
       res.status(400).send("Invalid input");
     }
     const token = await loginServices(email ,password);
+    console.log(token);
     if (token) {
         console.log("sending token");
       res.status(200).send(token);
     }else {
-      res.status(500).send(`samthing is rong with the input`);
+      console.log("sending: samthing is rong with the input");
+      res.status(400).send(`samthing is rong with the input`);
     }
   } catch (err) {
-    console.error("sending Servrt error");
+    console.error("sending Servrt error, The error is", err);
     res.status(500).send("Server error");
   }
 }
