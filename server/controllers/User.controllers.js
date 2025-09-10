@@ -26,7 +26,7 @@ console.log("server get to add a user metod:",req.method);
   }
 }
 
-// Method post , Given {email:email passord:password},  > return token if exsist  if not return text
+// Method post , Given {email:email passord:password},  > return token if exsist  if not return msg
 export async function login(req,res){
   console.log("server get to connect:",req.body);
    try {

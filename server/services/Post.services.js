@@ -6,7 +6,8 @@ import {
   updatePostDal,
   getPostDal
 } from "../dal/Post.dal.js";
-// import download from 'download';  
+import fs from 'fs';
+import https from 'https'; 
 
 
 // Given an img, description, likes, nameRaised, time  creat a new post , return post new id  if not return -1
@@ -18,24 +19,10 @@ export async function addNewPostServices(
   time
 ) {
   // Here comes a script that takes a URL and downloads the image to /public and returns its name.  
-  // i take the script from here  https://www.geeksforgeeks.org/node-js/how-to-download-a-file-using-node-js/
+  const imgNewName = Date.now()+".png"
+  await saveImgToDisk(img,"./public/"+imgNewName)
 
-
-// // Url of the image
-// const file = img;
-
-// const arrNameImg = img.split("/")
-// const NameImg = arrNameImg[arrNameImg.length-1]
-// console.log("NameImg:",NameImg);
-
-// // Path at which image will get downloaded
-// const filePath = `C:/Users/ertyu/שומרים/js and css/test/server/public/`;
-
-// await download(file,filePath)
-// console.log('Download Completed')
-
-
-const newId = await addNewPostDal(img, description, likes, nameRaised, time);
+const newId = await addNewPostDal(imgNewName, description, likes, nameRaised, time);
 return newId;
 }
 
@@ -68,6 +55,16 @@ export async function getPostServices(id) {
   }
   else {return false}
 
+}
+
+export async function saveImgToDisk(url,path){
+  const fullUrl = url;
+  const localPath = fs.createWriteStream(path)
+  const request = https.get(fullUrl,function(response){
+    console.log("the file dowlode: ",response);
+    response.pipe(localPath)
+  })
+  console.log("i itzchak");
 }
 
 // I tried to build something but it doesn't work.
