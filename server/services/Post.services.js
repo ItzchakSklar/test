@@ -57,6 +57,7 @@ export async function getPostServices(id) {
 
 }
 
+// Given url and path downloding from internet
 export async function saveImgToDisk(url,path){
   const fullUrl = url;
   const localPath = fs.createWriteStream(path)
